@@ -60,7 +60,7 @@ export default function UploadVideosPage() {
       data.append("upload_preset", "banquet_Hall_Reviews");
 
       const res = await fetch(
-        "https://api.cloudinary.com/v1_1/dftkirqns/video/upload",
+        `${process.env.NEXT_PUBLIC_CLOUDINARY_URL}/video/upload`,
         {
           method: "POST",
           body: data,

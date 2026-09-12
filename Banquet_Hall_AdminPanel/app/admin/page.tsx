@@ -1,38 +1,87 @@
 'use client';
 
 import { Card } from '@/components/ui/card';
-import { HomeIcon, BookMarked, Image, Video } from 'lucide-react';
+import { HomeIcon, BookMarked, Image, VideoIcon } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import {fetchAllBookings} from "@/services/BookingService"
+import axios from 'axios';
+import { Photo } from '@/types/Photo';
+import { Videos } from '@/types/Videos';
 
 export default function AdminDashboard() {
+
+  const [bookNum,setBookNum] = useState<number>(0);
+  const [picNum,setPicNum] = useState<number>(0);
+  const [vidNum,setVidNum] = useState<number>(0);
+
+
+  //fetch all Images
+  const fetchPictures = async () => {
+    try {
+      const response = await axios.get<Photo[]>(
+        `${process.env.NEXT_PUBLIC_SPRING_BACKEND_URL}/admin/posts`,
+      );
+      setPicNum(response.data.length);
+    } catch (error) {
+      console.error("Error fetching pictures:", error);
+  };
+}
+
+  //fetch all Videos
+  const fetchReviews = async () => {
+    try {
+      const response = await axios.get<Videos[]>(
+        `${process.env.NEXT_PUBLIC_SPRING_BACKEND_URL}/admin/reviews`,
+      );
+      setVidNum(response.data.length);
+    } catch (error) {
+      console.error("Error fetching pictures:", error);
+    }
+  };
+
+  
+
+  useEffect(() => {
+
+    //fetch all bookings
+      try {
+        const fetchBookings = async () => {
+          const bookings = await fetchAllBookings();
+          setBookNum(bookings.length)
+        };
+        fetchBookings();
+        fetchPictures();
+        fetchReviews();
+      } catch (error) {
+        console.log(error);
+      }
+    }, []);
+
+
+
+
   const stats = [
     {
       label: 'Total Bookings',
-      value: '24',
+      value: `${bookNum}`,
       icon: BookMarked,
       color: 'text-blue-600',
       bgColor: 'bg-blue-50',
     },
     {
       label: 'Images Uploaded',
-      value: '156',
+      value: `${picNum}`,
       icon: Image,
       color: 'text-purple-600',
       bgColor: 'bg-purple-50',
     },
     {
       label: 'Videos Uploaded',
-      value: '8',
-      icon: Video,
+      value: `${vidNum}`,
+      icon: VideoIcon,
       color: 'text-pink-600',
       bgColor: 'bg-pink-50',
     },
-    // {
-    //   label: 'Total Users',
-    //   value: '342',
-    //   icon: Users,
-    //   color: 'text-green-600',
-    //   bgColor: 'bg-green-50',
-    // },
   ];
 
   return (
@@ -108,7 +157,7 @@ export default function AdminDashboard() {
             href="/admin/upload-videos"
             className="group rounded-lg border border-gray-200 bg-white p-6 hover:border-pink-300 hover:shadow-md transition-all"
           >
-            <Video size={28} className="mb-3 text-pink-600" />
+            <VideoIcon size={28} className="mb-3 text-pink-600" />
             <h3 className="font-semibold text-gray-900 group-hover:text-pink-600 transition-colors">
               Upload Videos
             </h3>

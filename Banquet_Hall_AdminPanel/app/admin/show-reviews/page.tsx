@@ -5,25 +5,17 @@ import axios from "axios";
 import Image from "next/image";
 import { Trash2 } from "lucide-react";
 import toast from "react-hot-toast";
+import { Videos } from "@/types/Videos";
 
-interface Video {
-  id: string;
-  name: string;
-  comment: string;
-  video: string;
-  seq: number;
-  createdAt: string;
-  updatedAt: string;
-}
 
 export default function reviews() {
-  const [videos, setVideos] = useState<Video[]>([]);
+  const [videos, setVideos] = useState<Videos[]>([]);
   const [loading, setLoading] = useState(true);
 
   // Fetch all picture URLs
   const fetchReviews = async () => {
     try {
-      const response = await axios.get<Video[]>(
+      const response = await axios.get<Videos[]>(
         `${process.env.NEXT_PUBLIC_SPRING_BACKEND_URL}/admin/reviews`,
       );
       setVideos(response.data);

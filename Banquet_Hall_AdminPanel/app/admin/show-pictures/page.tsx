@@ -2,17 +2,19 @@
 
 import { useEffect, useState } from "react";
 import axios from "axios";
+import {Photo} from "@/types/Photo"
 import Image from "next/image";
 import { Trash2 } from "lucide-react";
 import toast from "react-hot-toast";
 
-interface Photo {
-  id: string;
-  image: string;
-  category: string;
-  seq: number;
-  createdAt: string;
-}
+
+// interface Photo {
+//   id: string;
+//   image: string;
+//   category: string;
+//   seq: number;
+//   createdAt: string;
+// }
 
 export default function pictures() {
   const [photos, setPhotos] = useState<Photo[]>([]);

@@ -92,7 +92,7 @@ export default function UploadImagesPage() {
       formData.append("file", selectedFiles[0]);
       formData.append("upload_preset", "banquet_hall_images");
       const res = await fetch(
-        "https://api.cloudinary.com/v1_1/dftkirqns/image/upload",
+        `${process.env.NEXT_PUBLIC_CLOUDINARY_URL}/image/upload`,
         {
           method: "POST",
           body: formData,
