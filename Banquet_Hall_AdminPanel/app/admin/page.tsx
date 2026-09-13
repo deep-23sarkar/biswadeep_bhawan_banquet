@@ -19,7 +19,7 @@ export default function AdminDashboard() {
   const fetchPictures = async () => {
     try {
       const response = await axios.get<Photo[]>(
-        `${process.env.NEXT_PUBLIC_SPRING_BACKEND_URL}/admin/posts`,
+        `${process.env.NEXT_PUBLIC_SPRING_BACKEND_URL}/posts`,
       );
       setPicNum(response.data.length);
     } catch (error) {
@@ -31,7 +31,7 @@ export default function AdminDashboard() {
   const fetchReviews = async () => {
     try {
       const response = await axios.get<Videos[]>(
-        `${process.env.NEXT_PUBLIC_SPRING_BACKEND_URL}/admin/reviews`,
+        `${process.env.NEXT_PUBLIC_SPRING_BACKEND_URL}/reviews`,
       );
       setVidNum(response.data.length);
     } catch (error) {
