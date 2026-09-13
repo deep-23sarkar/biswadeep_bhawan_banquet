@@ -24,7 +24,7 @@ export default function pictures() {
   const fetchPictures = async () => {
     try {
       const response = await axios.get<Photo[]>(
-        `${process.env.NEXT_PUBLIC_SPRING_BACKEND_URL}/admin/posts`,
+        `${process.env.NEXT_PUBLIC_SPRING_BACKEND_URL}/posts`,
       );
       setPhotos(response.data);
     } catch (error) {
@@ -42,7 +42,7 @@ export default function pictures() {
   const handleDelete = async (id: string) => {
     try {
       const response = await axios.delete(
-        `${process.env.NEXT_PUBLIC_SPRING_BACKEND_URL}/admin/delete-posts/${id}`,
+        `${process.env.NEXT_PUBLIC_SPRING_BACKEND_URL}/delete-posts/${id}`,
       );
 
       toast.success(response.data);

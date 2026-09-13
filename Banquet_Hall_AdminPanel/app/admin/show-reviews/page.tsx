@@ -16,7 +16,7 @@ export default function reviews() {
   const fetchReviews = async () => {
     try {
       const response = await axios.get<Videos[]>(
-        `${process.env.NEXT_PUBLIC_SPRING_BACKEND_URL}/admin/reviews`,
+        `${process.env.NEXT_PUBLIC_SPRING_BACKEND_URL}/reviews`,
       );
       setVideos(response.data);
     //   console.log(videos);
@@ -35,7 +35,7 @@ export default function reviews() {
   const handleDelete = async (id: string) => {
     try {
       const response = await axios.delete(
-        `${process.env.NEXT_PUBLIC_SPRING_BACKEND_URL}/admin/delete-reviews/${id}`,
+        `${process.env.NEXT_PUBLIC_SPRING_BACKEND_URL}/delete-reviews/${id}`,
       );
 
       toast.success(response.data);
