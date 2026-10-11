@@ -128,7 +128,7 @@ export function About() {
                   <p className="text-xl font-serif text-foreground/70">Premium Venue</p>
                 </div> */}
                 <Image
-                  src={"/Hall.jpeg"}
+                  src={"/bd-logo.jpeg"}
                   alt="Hall picture"
                   fill
                   className="object-center rounded-2xl"

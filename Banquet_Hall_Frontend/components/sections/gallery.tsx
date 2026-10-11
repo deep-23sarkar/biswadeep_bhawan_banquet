@@ -81,7 +81,7 @@ export function Gallery() {
   const [activeCategory, setActiveCategory] = useState("All");
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
   const [galleryItems, setGalleryItems] = useState<PostImg[]>([]);
-
+  const [visibleCount, setVisibleCount] = useState(4);
 
   //Fetch all photos from backend
   useEffect(() => {
@@ -101,6 +101,8 @@ export function Gallery() {
     activeCategory === "All"
       ? galleryItems
       : galleryItems.filter((item) => item.category === activeCategory);
+
+  const visibleItems = filteredItems.slice(0, visibleCount);
 
   const currentIndex =
     selectedImage !== null
@@ -163,7 +165,10 @@ export function Gallery() {
             <Button
               key={category}
               variant={activeCategory === category ? "default" : "outline"}
-              onClick={() => setActiveCategory(category)}
+              onClick={() => {
+                setActiveCategory(category);
+                setVisibleCount(4);
+              }}
               className={`rounded-full px-6 transition-all duration-300 ${
                 activeCategory === category
                   ? "bg-primary text-primary-foreground"
@@ -181,7 +186,7 @@ export function Gallery() {
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
         >
           <AnimatePresence mode="popLayout">
-            {filteredItems.map((item, index) => (
+            {visibleItems.map((item, index) => (
               <motion.div
                 key={item.id}
                 layout
@@ -201,7 +206,7 @@ export function Gallery() {
                   />
 
                   {/* Placeholder gradient */}
-                  <div className= "absolute inset-0 bg-linear-to-br" />
+                  <div className="absolute inset-0 bg-linear-to-br" />
 
                   {/* Overlay */}
                   <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/40 transition-colors duration-300" />
@@ -237,6 +242,23 @@ export function Gallery() {
             ))}
           </AnimatePresence>
         </motion.div>
+
+        {/* Show More Button */}
+        {visibleCount < filteredItems.length && (
+          <div className="flex justify-center mt-10">
+            <Button
+              variant="outline"
+              onClick={() =>
+                setVisibleCount((prev) =>
+                  Math.min(prev + 4, filteredItems.length),
+                )
+              }
+              className="rounded-full px-8 py-3 border-primary/30 text-foreground hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+            >
+              Show More
+            </Button>
+          </div>
+        )}
 
         {/* Lightbox */}
         <AnimatePresence>

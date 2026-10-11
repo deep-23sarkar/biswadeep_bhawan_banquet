@@ -42,11 +42,11 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: '/hall-icon.jpeg',
+        url: '/wb-logo2.jpeg',
         media: '(prefers-color-scheme: light)',
       },
       {
-        url: '/hall-icon.jpeg',
+        url: '/wb-logo2.jpeg',
         media: '(prefers-color-scheme: dark)',
       },
       // {
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
       //   type: 'image/svg+xml',
       // },
     ],
-    apple: '/hall-icon.jpeg',
+    apple: '/wb-logo2.jpeg',
   },
 }
 
