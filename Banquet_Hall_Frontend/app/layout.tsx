@@ -42,11 +42,11 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: '/wb-logo2.jpeg',
+        url: '/wb-logo2.jpg',
         media: '(prefers-color-scheme: light)',
       },
       {
-        url: '/wb-logo2.jpeg',
+        url: '/wb-logo2.jpg',
         media: '(prefers-color-scheme: dark)',
       },
       // {
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
       //   type: 'image/svg+xml',
       // },
     ],
-    apple: '/wb-logo2.jpeg',
+    apple: '/wb-logo2.jpg',
   },
 }
 
