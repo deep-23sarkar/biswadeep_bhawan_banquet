@@ -264,7 +264,7 @@ export function Gallery() {
               <Button
                 variant="outline"
                 onClick={() => setVisibleCount(4)}
-                className="rounded-full px-8 border-primary/30 text-foreground hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+                className="rounded-full px-8 border-primary/30 text-foreground hover:bg-primary hover:text-primary-foreground transition-all duration-300 hover:scale-105 active:scale-95"
               >
                 Show Less
               </Button>
