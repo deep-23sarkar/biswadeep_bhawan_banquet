@@ -92,8 +92,9 @@ export function Comments() {
     setAvatar("");
     setText("");
     setError("");
+  }
 
-    useEffect(() => {
+  useEffect(() => {
       try {
         const fetchComments = async () => {
           const comments = await fetchAllComments();
@@ -106,7 +107,7 @@ export function Comments() {
         console.log(error);
       }
     }, []);
-  }
+
 
   return (
     <section
