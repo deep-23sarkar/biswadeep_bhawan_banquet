@@ -66,6 +66,7 @@ export function Comments() {
   const [text, setText] = useState("");
   const [error, setError] = useState("");
   const [commentCount, setCommentCount] = useState(0);
+  const [visibleCount, setVisibleCount] = useState(4);
 
   async function handleSubmit(event: React.SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -95,19 +96,20 @@ export function Comments() {
   }
 
   useEffect(() => {
-      try {
-        const fetchComments = async () => {
-          const comments = await fetchAllComments();
-          setComments(comments);
-          setCommentCount(comments.length);
-          console.log(comments)
-        };
-        fetchComments();
-      } catch (error) {
-        console.log(error);
-      }
-    }, []);
+    try {
+      const fetchComments = async () => {
+        const comments = await fetchAllComments();
+        setComments(comments);
+        setCommentCount(comments.length);
+        console.log(comments);
+      };
+      fetchComments();
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
 
+  const visibleComments = comments.slice(0, visibleCount);
 
   return (
     <section
@@ -189,20 +191,20 @@ export function Comments() {
                 {commentCount} comments
               </span>
             </div>
-            {comments.map((comment) => (
+
+            {visibleComments.map((comment) => (
               <article
                 key={comment.id}
                 className="rounded-2xl border border-border/70 bg-background/75 p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
               >
                 <div className="flex gap-3">
                   <Avatar name={comment.name} src={avatar} />
+
                   <div className="min-w-0 flex-1">
                     <div className="flex flex-wrap items-baseline justify-between gap-2">
                       <h4 className="font-semibold">{comment.name}</h4>
-                      {/* <time className="text-xs text-muted-foreground">
-                        {comment.createdAt}
-                      </time> */}
                     </div>
+
                     <p className="mt-2 leading-relaxed text-muted-foreground">
                       {comment.text}
                     </p>
@@ -210,6 +212,34 @@ export function Comments() {
                 </div>
               </article>
             ))}
+
+            {comments.length > 4 && (
+              <div className="flex justify-center gap-3 pt-4">
+                {visibleCount < comments.length && (
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setVisibleCount((prev) =>
+                        Math.min(prev + 4, comments.length),
+                      )
+                    }
+                    className="rounded-full bg-gold-dark px-6 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-gold hover:scale-105 active:scale-95"
+                  >
+                    Show More
+                  </button>
+                )}
+
+                {visibleCount > 4 && (
+                  <button
+                    type="button"
+                    onClick={() => setVisibleCount(4)}
+                    className="rounded-full border border-gold-dark/30 px-6 py-2.5 text-sm font-semibold text-gold-dark transition-all duration-300 hover:bg-blush hover:scale-105 active:scale-95"
+                  >
+                    Show Less
+                  </button>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </div>

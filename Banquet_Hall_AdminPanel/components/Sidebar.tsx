@@ -1,6 +1,6 @@
 'use client';
 
-import { BookOpen, ImagePlus, Video, Home, X, PictureInPicture, FileVideo2 } from 'lucide-react';
+import { BookOpen, ImagePlus, Video, Home, X, PictureInPicture, FileVideo2, Code2Icon } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
@@ -41,6 +41,11 @@ const navItems = [
     label: 'All Reviews',
     href: '/admin/show-reviews',
     icon: FileVideo2
+  },
+  {
+    label: 'Comments',
+    href: '/admin/comments',
+    icon: Code2Icon
   }
 ];
 
