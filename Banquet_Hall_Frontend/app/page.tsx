@@ -17,6 +17,7 @@ import { Footer } from "@/components/footer"
 import {FAQ} from "@/components/sections/faq"
 
 import { Toaster } from "react-hot-toast"
+import {Comments} from "@/components/sections/comments"
 
 // Dynamic import for smooth scroll (client-side only)
 const SmoothScrollProvider = dynamic(
@@ -45,6 +46,7 @@ export default function Home() {
         <Location />
         <BookingForm />
         <FAQ/>
+        <Comments/>
         <Contact />
         <Footer />
         <Toaster position="top-right"/>
