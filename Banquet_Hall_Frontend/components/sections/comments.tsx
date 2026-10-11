@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { MessageCircle, Send, UserCircle2 } from "lucide-react";
-import {commentServices, fetchAllComments} from "@/services/CommentService";
+import { commentServices, fetchAllComments } from "@/services/CommentService";
 import toast from "react-hot-toast";
 
 interface Comment {
@@ -65,8 +65,7 @@ export function Comments() {
   const [avatar, setAvatar] = useState("");
   const [text, setText] = useState("");
   const [error, setError] = useState("");
-
-  const commentCount = useMemo(() => comments.length, [comments.length]);
+  const [commentCount, setCommentCount] = useState(0);
 
   async function handleSubmit(event: React.SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -75,39 +74,38 @@ export function Comments() {
       setError("Please add your name and a comment.");
       return;
     }
-    const name = formdata.get("name")
-    const text = formdata.get("text")
+    const name = formdata.get("name");
+    const text = formdata.get("text");
 
     try {
-        const uploadComments = await commentServices({
-          name: name as string,
-          text: text as string,
-        });
-        console.log("Submitted: ", uploadComments);
-        toast.success("Thanks for your valuable comment!");
-      } catch (error) {
-        console.log("Error: ", error);
-      }
+      const uploadComments = await commentServices({
+        name: name as string,
+        text: text as string,
+      });
+      console.log("Submitted: ", uploadComments);
+      toast.success("Thanks for your valuable comment!");
+    } catch (error) {
+      console.log("Error: ", error);
+    }
 
     setName("");
     setAvatar("");
     setText("");
     setError("");
 
-
     useEffect(() => {
-    try {
-      const fetchComments = async () => {
-        const comments = await fetchAllComments();
-        setComments(comments)
-      };
-      fetchComments();
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
-
-
+      try {
+        const fetchComments = async () => {
+          const comments = await fetchAllComments();
+          setComments(comments);
+          setCommentCount(comments.length());
+          console.log(comments)
+        };
+        fetchComments();
+      } catch (error) {
+        console.log(error);
+      }
+    }, []);
   }
 
   return (
@@ -148,8 +146,8 @@ export function Comments() {
               <label className="block text-sm font-medium">
                 Your name
                 <input
-                id="name"
-                name="name"
+                  id="name"
+                  name="name"
                   value={name}
                   onChange={(event) => setName(event.target.value)}
                   placeholder="e.g. Ananya Rao"
@@ -159,8 +157,8 @@ export function Comments() {
               <label className="block text-sm font-medium">
                 Your comment
                 <textarea
-                id="text"
-                name="text"
+                  id="text"
+                  name="text"
                   value={text}
                   onChange={(event) => setText(event.target.value)}
                   placeholder="Share a note about your celebration..."
