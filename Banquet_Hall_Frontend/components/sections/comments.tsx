@@ -99,7 +99,7 @@ export function Comments() {
         const fetchComments = async () => {
           const comments = await fetchAllComments();
           setComments(comments);
-          setCommentCount(comments.length());
+          setCommentCount(comments.length);
           console.log(comments)
         };
         fetchComments();
@@ -199,9 +199,9 @@ export function Comments() {
                   <div className="min-w-0 flex-1">
                     <div className="flex flex-wrap items-baseline justify-between gap-2">
                       <h4 className="font-semibold">{comment.name}</h4>
-                      <time className="text-xs text-muted-foreground">
+                      {/* <time className="text-xs text-muted-foreground">
                         {comment.createdAt}
-                      </time>
+                      </time> */}
                     </div>
                     <p className="mt-2 leading-relaxed text-muted-foreground">
                       {comment.text}
