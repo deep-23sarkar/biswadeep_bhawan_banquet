@@ -82,11 +82,11 @@ export function Navigation() {
             >
               {!isScrolled ? (
                 <span className="text-2xl md:text-3xl font-serif font-bold text-gold-gradient">
-                  Biswa Deep
+                  Biswadeep
                 </span>
               ) : (
                 <span className="text-2xl md:text-3xl font-serif font-bold text-gold-gradient">
-                  Biswa Deep
+                  Biswadeep
                 </span>
               )}
             </motion.a>

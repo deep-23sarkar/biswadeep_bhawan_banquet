@@ -243,20 +243,32 @@ export function Gallery() {
           </AnimatePresence>
         </motion.div>
 
-        {/* Show More Button */}
-        {visibleCount < filteredItems.length && (
-          <div className="flex justify-center mt-10">
-            <Button
-              variant="outline"
-              onClick={() =>
-                setVisibleCount((prev) =>
-                  Math.min(prev + 4, filteredItems.length),
-                )
-              }
-              className="rounded-full px-8 py-3 border-primary/30 text-foreground hover:bg-primary hover:text-primary-foreground transition-all duration-300"
-            >
-              Show More
-            </Button>
+        {/* Show More / Show Less Buttons */}
+        {filteredItems.length > 4 && (
+          <div className="flex justify-center gap-4 mt-10">
+            {visibleCount < filteredItems.length && (
+              <Button
+                variant="outline"
+                onClick={() =>
+                  setVisibleCount((prev) =>
+                    Math.min(prev + 4, filteredItems.length),
+                  )
+                }
+                className="rounded-full px-8 border-primary/30 text-foreground hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+              >
+                Show More
+              </Button>
+            )}
+
+            {visibleCount > 4 && (
+              <Button
+                variant="outline"
+                onClick={() => setVisibleCount(4)}
+                className="rounded-full px-8 border-primary/30 text-foreground hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+              >
+                Show Less
+              </Button>
+            )}
           </div>
         )}
 
